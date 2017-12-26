@@ -109,5 +109,28 @@
 	      s=Math.floor(t/1000%60);
 	    } 
 	    return "剩余时间"+d+"天 "+h+"小时 "+m+" 分钟"+s+" 秒";
+	},
+	mumber_format:function (num,decimals=0){
+		/*
+		@descript:格式化数字
+		@param：num[float],decimals[int]
+		 */
+		if(typeof num !== "number"||typeof decimals !== "number"){
+			throw new Error('param type is error!');
+		}
+		var num_arr = (num.toString()).split(".");
+		var num_end=""
+		if(num_arr.length == 1){
+			num_arr[1]=[];
+		}
+		if(num_arr[1].length>=decimals){
+			num_end = num_arr[1].substr(0,decimals);
+		}else{
+				num_end = num_arr[1];
+			for (var i = 0 , len = decimals-num_arr[1].length;i<len;i++) {
+				num_end +="0";
+			}
+		}
+		return num_arr[0]+"."+num_end;
 	}
 }
